@@ -6,7 +6,7 @@ class GPT2Dataset(Dataset):
     
     def __init__(self, **args):
         self.args = args
-        self.vocab = AutoTokenizer.from_pretrained(args['tokenizer'][args['lang']])
+        self.vocab = AutoTokenizer.from_pretrained('gpt2', cache_dir=args['data_root_dir'])
         self.pad = self.vocab.convert_tokens_to_ids('<|endoftext|>')
         
         self.data = []
@@ -42,7 +42,7 @@ class GPT2PPLDataset(Dataset):
     
     def __init__(self, **args):
         self.args = args
-        self.vocab = AutoTokenizer.from_pretrained(args['tokenizer'][args['lang']])
+        self.vocab = AutoTokenizer.from_pretrained('gpt2', cache_dir=args['data_root_dir'])
         self.pad = self.vocab.convert_tokens_to_ids('<|endoftext|>')
         
         self.data = []

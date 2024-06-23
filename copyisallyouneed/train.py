@@ -9,15 +9,21 @@ def parser_args():
     parser.add_argument('--dataset', default='ecommerce', type=str)
     parser.add_argument('--model', type=str)
     parser.add_argument('--multi_gpu', type=str, default=None)
-    parser.add_argument('--local_rank', type=int)
+    parser.add_argument('--local-rank', type=int)
     parser.add_argument('--total_workers', type=int)
+    parser.add_argument('--local_rank', type=int)
+
     return parser.parse_args()
 
 
 def main(**args):
     torch.cuda.empty_cache()
+    print(f'LOCAL_RANK IS {args['local_rank']}, os.environ is {os.environ['LOCAL_RANK']}')
     torch.cuda.set_device(args['local_rank'])
-    torch.distributed.init_process_group(backend='nccl', init_method='env://')
+
+
+    torch.distributed.init_process_group()
+    #torch.distributed.init_process_group(backend='nccl', init_method='env://')
 
     args['global_rank'] = dist.get_rank()
     print(f'[!] global rank: {args["global_rank"]}')

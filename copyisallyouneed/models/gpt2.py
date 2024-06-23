@@ -4,10 +4,10 @@ class GPT2Baseline(nn.Module):
 
     def __init__(self, **args):
         super(GPT2Baseline, self).__init__()
-        model = args['pretrained_model'][args['lang']]
+        model = 'gpt2'
         self.model_name = model
-        self.model = GPT2LMHeadModel.from_pretrained(model)
-        self.vocab = AutoTokenizer.from_pretrained(model)
+        self.model = GPT2LMHeadModel.from_pretrained(model, cache_dir=args['data_root_dir'])
+        self.vocab = AutoTokenizer.from_pretrained(model, cache_dir=args['data_root_dir'])
         self.vocab_size = len(self.vocab)
         self.args = args
 

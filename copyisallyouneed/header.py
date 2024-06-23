@@ -42,7 +42,7 @@ import argparse
 from torch.nn.utils.rnn import pad_sequence
 import joblib
 from elasticsearch import Elasticsearch, helpers
-import faiss
+
 import torch.multiprocessing
 import linecache
 import nanopq
